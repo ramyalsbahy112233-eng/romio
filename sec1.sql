@@ -8,7 +8,8 @@ use products;
 
 insert into products values(
 1,"pen","stdying"
-),(2,"book","books");
+),(2,"book","books"),(3,"t","t");
 
 select * from products;
+
 
