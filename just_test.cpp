@@ -1,6 +1,8 @@
 #include <iostream>
 using namespace std;
 
+
+//this is fibonachi code
 const int MAX = 1000;
 long long F[MAX];
 
