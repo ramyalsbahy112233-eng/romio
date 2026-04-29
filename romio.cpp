@@ -1,7 +1,8 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
-int binary_search(int arr[], int n, int target)
+int binary_search(int arr[], int n, int target) // O(log n)
 {
 
     int right = n - 1;
@@ -25,12 +26,71 @@ int binary_search(int arr[], int n, int target)
     return -1;
 }
 
+void merge(int arr[], int left, int mid, int right)
+{
+    int n1 = mid - left + 1;
+    int n2 = right - mid;
+
+    int *L = new int[n1];
+    int *R = new int[n2];
+
+    for (int i = 0; i < n1; i++)
+        L[i] = arr[left + i];
+
+    for (int i = 0; i < n2; i++)
+        R[i] = arr[mid + 1 + i];
+
+    int i = 0, j = 0, k = left;
+
+    while (i < n1 && j < n2)
+    {
+        if (L[i] <= R[j])
+            arr[k++] = L[i++];
+        else
+            arr[k++] = R[j++];
+    }
+
+    while (i < n1)
+        arr[k++] = L[i++];
+
+    while (j < n2)
+        arr[k++] = R[j++];
+
+    delete[] L;
+    delete[] R;
+}
+
+void mergeSort(int arr[], int left, int right) // O(nlogn)
+{
+    if (left >= right)
+        return;
+
+    int mid = left + (right - left) / 2;
+
+    mergeSort(arr, left, mid);
+    mergeSort(arr, mid + 1, right);
+    merge(arr, left, mid, right);
+}
+
 int main()
 {
+    // test for binary search..
+    int arr1[5] = {1, 2, 3, 4, 5};
 
-    int arr[5] = {1, 2, 3, 4, 5};
+    int n1 = sizeof(arr1) / sizeof(arr1[0]);
 
-    int n = sizeof(arr) / sizeof(arr[0]);
+    cout << "the number you want is in index: " << binary_search(arr1, n1, 5) << endl;
 
-    cout << binary_search(arr, n, 5) << endl;
+    cout << string(50, '-') << endl;
+
+    // test for merge_sort
+    int arr2[] = {38, 27, 43, 3, 9, 82, 10};
+
+    int n2 = sizeof(arr2) / sizeof(arr2[0]);
+
+    mergeSort(arr2, 0, n2 - 1);
+
+    cout << "and this is the sorted array: " << endl;
+    for (int i = 0; i < n2; i++)
+        cout << arr2[i] << " ";
 }
