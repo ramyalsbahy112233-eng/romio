@@ -25,7 +25,7 @@ int binary_search(int arr[], int n, int target) // O(log n)
     }
     return -1;
 }
-
+//---------------------------------------------------
 void merge(int arr[], int left, int mid, int right)
 {
     int n1 = mid - left + 1;
@@ -59,7 +59,7 @@ void merge(int arr[], int left, int mid, int right)
     delete[] L;
     delete[] R;
 }
-
+//---------------------------------------------------
 void mergeSort(int arr[], int left, int right) // O(nlogn)
 {
     if (left >= right)
@@ -72,6 +72,24 @@ void mergeSort(int arr[], int left, int right) // O(nlogn)
     merge(arr, left, mid, right);
 }
 
+//--------------------------------------------------
+
+// this is fibonacci code
+const int MAX = 1000;
+long long F[MAX]; // here we added a storage for dynamic programming
+
+long long fib(int n) // O(n)
+{
+    if (F[n] != 0)
+        return F[n];
+
+    if (n <= 1)
+        return F[n] = 1;
+
+    return F[n] = fib(n - 1) + fib(n - 2);
+}
+
+//-------------------------------------------------
 int main()
 {
     // test for binary search..
@@ -83,6 +101,7 @@ int main()
 
     cout << string(50, '-') << endl;
 
+    //-------------------------------------------
     // test for merge_sort
     int arr2[] = {38, 27, 43, 3, 9, 82, 10};
 
@@ -93,4 +112,13 @@ int main()
     cout << "and this is the sorted array: " << endl;
     for (int i = 0; i < n2; i++)
         cout << arr2[i] << " ";
+    cout << endl;
+    cout << string(50, '-') << endl;
+
+    //--------------------------------------------
+    // test for dynamic programming:
+
+    cout << "this is the fib result" << endl;
+    cout << fib(50) << endl; // don't try big numbers because it might cause an overflow, (not over 90)
+    cout << string(50, '-') << endl;
 }
