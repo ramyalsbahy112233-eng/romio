@@ -71,7 +71,29 @@ void mergeSort(int arr[], int left, int right) // O(nlogn)
     mergeSort(arr, mid + 1, right);
     merge(arr, left, mid, right);
 }
+//--------------------------------------------------
+int inseertion_sort(int arr[], int n)
+{
 
+    for (int j = 1; j <= n; j++)
+    {
+        int temp = arr[j];
+        int i = j - 1;
+        while (i >= 0 && arr[i] > temp)
+        {
+            arr[i + 1] = arr[i];
+            i = i - 1;
+        }
+        arr[i + 1] = temp;
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+        cout << arr[i] << "->";
+    }
+    cout << endl;
+    return 1;
+}
 //--------------------------------------------------
 
 // this is fibonacci code
@@ -120,5 +142,12 @@ int main()
 
     cout << "this is the fib result" << endl;
     cout << fib(50) << endl; // don't try big numbers because it might cause an overflow, (not over 90)
+    cout << string(50, '-') << endl;
+    //--------------------------------------------
+    // test for insertion sort:
+    int arr[] = {1, 4, 3, 7, 4, 9, 3, 9};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    cout << "this test for insertion sort:" << endl;
+    inseertion_sort(arr, n);
     cout << string(50, '-') << endl;
 }
